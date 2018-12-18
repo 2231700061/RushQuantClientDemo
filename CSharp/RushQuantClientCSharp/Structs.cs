@@ -112,15 +112,11 @@ namespace RushQuant.Clients
     public sealed class LoginOutput
     {
         private uint _size;
-        public uint Size
+        internal uint Size
         {
             get
             {
                 return this._size;
-            }
-            set
-            {
-                this._size = value;
             }
         }
         private int _id;
@@ -129,10 +125,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._id;
-            }
-            set
-            {
-                this._id = value;
             }
         }
         private string _errorMessage;
@@ -143,15 +135,11 @@ namespace RushQuant.Clients
             {
                 return this._errorMessage;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 100))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
+        }
 
-                this._errorMessage = value;
-            }
+        internal static int GetSize()
+        {
+            return 108;
         }
 
         internal unsafe void ReadFrom(IntPtr pointer)
@@ -231,15 +219,11 @@ namespace RushQuant.Clients
     public sealed class QueryTickDataOutput
     {
         private uint _size;
-        public uint Size
+        internal uint Size
         {
             get
             {
                 return this._size;
-            }
-            set
-            {
-                this._size = value;
             }
         }
         private int _id;
@@ -249,10 +233,6 @@ namespace RushQuant.Clients
             {
                 return this._id;
             }
-            set
-            {
-                this._id = value;
-            }
         }
         private string _errorMessage;
         /// <summary>错误消息</summary>
@@ -261,15 +241,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._errorMessage;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 100))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._errorMessage = value;
             }
         }
 
@@ -281,15 +252,6 @@ namespace RushQuant.Clients
             {
                 return this._exchangeId;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 10))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._exchangeId = value;
-            }
         }
         private string _instrumentCode;
         /// <summary>合约代码</summary>
@@ -298,15 +260,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._instrumentCode;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 16))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._instrumentCode = value;
             }
         }
         private string _instrumentName;
@@ -317,15 +270,6 @@ namespace RushQuant.Clients
             {
                 return this._instrumentName;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 32))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._instrumentName = value;
-            }
         }
         private double _preClosePrice;
         public double PreClosePrice
@@ -333,10 +277,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._preClosePrice;
-            }
-            set
-            {
-                this._preClosePrice = value;
             }
         }
         private double _openPrice;
@@ -346,10 +286,6 @@ namespace RushQuant.Clients
             {
                 return this._openPrice;
             }
-            set
-            {
-                this._openPrice = value;
-            }
         }
         private double _latestPrice;
         public double LatestPrice
@@ -357,10 +293,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._latestPrice;
-            }
-            set
-            {
-                this._latestPrice = value;
             }
         }
         private double _bidPrice1;
@@ -370,10 +302,6 @@ namespace RushQuant.Clients
             {
                 return this._bidPrice1;
             }
-            set
-            {
-                this._bidPrice1 = value;
-            }
         }
         private double _bidPrice2;
         public double BidPrice2
@@ -381,10 +309,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._bidPrice2;
-            }
-            set
-            {
-                this._bidPrice2 = value;
             }
         }
         private double _bidPrice3;
@@ -394,10 +318,6 @@ namespace RushQuant.Clients
             {
                 return this._bidPrice3;
             }
-            set
-            {
-                this._bidPrice3 = value;
-            }
         }
         private double _bidPrice4;
         public double BidPrice4
@@ -405,10 +325,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._bidPrice4;
-            }
-            set
-            {
-                this._bidPrice4 = value;
             }
         }
         private double _bidPrice5;
@@ -418,10 +334,6 @@ namespace RushQuant.Clients
             {
                 return this._bidPrice5;
             }
-            set
-            {
-                this._bidPrice5 = value;
-            }
         }
         private int _bidVolume1;
         public int BidVolume1
@@ -429,10 +341,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._bidVolume1;
-            }
-            set
-            {
-                this._bidVolume1 = value;
             }
         }
         private int _bidVolume2;
@@ -442,10 +350,6 @@ namespace RushQuant.Clients
             {
                 return this._bidVolume2;
             }
-            set
-            {
-                this._bidVolume2 = value;
-            }
         }
         private int _bidVolume3;
         public int BidVolume3
@@ -453,10 +357,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._bidVolume3;
-            }
-            set
-            {
-                this._bidVolume3 = value;
             }
         }
         private int _bidVolume4;
@@ -466,10 +366,6 @@ namespace RushQuant.Clients
             {
                 return this._bidVolume4;
             }
-            set
-            {
-                this._bidVolume4 = value;
-            }
         }
         private int _bidVolume5;
         public int BidVolume5
@@ -477,10 +373,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._bidVolume5;
-            }
-            set
-            {
-                this._bidVolume5 = value;
             }
         }
         private double _askPrice1;
@@ -490,10 +382,6 @@ namespace RushQuant.Clients
             {
                 return this._askPrice1;
             }
-            set
-            {
-                this._askPrice1 = value;
-            }
         }
         private double _askPrice2;
         public double AskPrice2
@@ -501,10 +389,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._askPrice2;
-            }
-            set
-            {
-                this._askPrice2 = value;
             }
         }
         private double _askPrice3;
@@ -514,10 +398,6 @@ namespace RushQuant.Clients
             {
                 return this._askPrice3;
             }
-            set
-            {
-                this._askPrice3 = value;
-            }
         }
         private double _askPrice4;
         public double AskPrice4
@@ -525,10 +405,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._askPrice4;
-            }
-            set
-            {
-                this._askPrice4 = value;
             }
         }
         private double _askPrice5;
@@ -538,10 +414,6 @@ namespace RushQuant.Clients
             {
                 return this._askPrice5;
             }
-            set
-            {
-                this._askPrice5 = value;
-            }
         }
         private int _askVolume1;
         public int AskVolume1
@@ -549,10 +421,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._askVolume1;
-            }
-            set
-            {
-                this._askVolume1 = value;
             }
         }
         private int _askVolume2;
@@ -562,10 +430,6 @@ namespace RushQuant.Clients
             {
                 return this._askVolume2;
             }
-            set
-            {
-                this._askVolume2 = value;
-            }
         }
         private int _askVolume3;
         public int AskVolume3
@@ -573,10 +437,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._askVolume3;
-            }
-            set
-            {
-                this._askVolume3 = value;
             }
         }
         private int _askVolume4;
@@ -586,10 +446,6 @@ namespace RushQuant.Clients
             {
                 return this._askVolume4;
             }
-            set
-            {
-                this._askVolume4 = value;
-            }
         }
         private int _askVolume5;
         public int AskVolume5
@@ -598,10 +454,11 @@ namespace RushQuant.Clients
             {
                 return this._askVolume5;
             }
-            set
-            {
-                this._askVolume5 = value;
-            }
+        }
+
+        internal static int GetSize()
+        {
+            return 310;
         }
 
         internal unsafe void ReadFrom(IntPtr pointer)
@@ -675,15 +532,6 @@ namespace RushQuant.Clients
             {
                 return this._stockholderCode;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 12))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._stockholderCode = value;
-            }
         }
         private string _exchangeId;
         /// <summary>交易所代码</summary>
@@ -692,15 +540,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._exchangeId;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 10))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._exchangeId = value;
             }
         }
 
@@ -718,15 +557,11 @@ namespace RushQuant.Clients
     public sealed class QueryStockholderInfoOutput
     {
         private uint _size;
-        public uint Size
+        internal uint Size
         {
             get
             {
                 return this._size;
-            }
-            set
-            {
-                this._size = value;
             }
         }
         private int _id;
@@ -735,10 +570,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._id;
-            }
-            set
-            {
-                this._id = value;
             }
         }
         private string _errorMessage;
@@ -749,15 +580,6 @@ namespace RushQuant.Clients
             {
                 return this._errorMessage;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 100))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._errorMessage = value;
-            }
         }
 
         private int _total;
@@ -767,10 +589,6 @@ namespace RushQuant.Clients
             {
                 return this._total;
             }
-            set
-            {
-                this._total = value;
-            }
         }
         private int _count;
         public int Count
@@ -778,10 +596,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._count;
-            }
-            set
-            {
-                this._count = value;
             }
         }
         private QueryStockholderInfoOutputItem[] _items;
@@ -791,10 +605,11 @@ namespace RushQuant.Clients
             {
                 return this._items;
             }
-            set
-            {
-                this._items = value;
-            }
+        }
+
+        internal static int GetSize()
+        {
+            return 116;
         }
 
         internal unsafe void ReadFrom(IntPtr pointer)
@@ -850,10 +665,6 @@ namespace RushQuant.Clients
             {
                 return this._currency;
             }
-            set
-            {
-                this._currency = value;
-            }
         }
         private double _remainingCapitalAmount;
         public double RemainingCapitalAmount
@@ -861,10 +672,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._remainingCapitalAmount;
-            }
-            set
-            {
-                this._remainingCapitalAmount = value;
             }
         }
         private double _availableCapitalAmount;
@@ -874,10 +681,6 @@ namespace RushQuant.Clients
             {
                 return this._availableCapitalAmount;
             }
-            set
-            {
-                this._availableCapitalAmount = value;
-            }
         }
         private double _withdrawableCapitalAmount;
         public double WithdrawableCapitalAmount
@@ -886,10 +689,6 @@ namespace RushQuant.Clients
             {
                 return this._withdrawableCapitalAmount;
             }
-            set
-            {
-                this._withdrawableCapitalAmount = value;
-            }
         }
         private double _totalAssetAmount;
         public double TotalAssetAmount
@@ -897,10 +696,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._totalAssetAmount;
-            }
-            set
-            {
-                this._totalAssetAmount = value;
             }
         }
 
@@ -921,15 +716,11 @@ namespace RushQuant.Clients
     public sealed class QuerySecurityCapitalInfoOutput
     {
         private uint _size;
-        public uint Size
+        internal uint Size
         {
             get
             {
                 return this._size;
-            }
-            set
-            {
-                this._size = value;
             }
         }
         private int _id;
@@ -938,10 +729,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._id;
-            }
-            set
-            {
-                this._id = value;
             }
         }
         private string _errorMessage;
@@ -952,15 +739,6 @@ namespace RushQuant.Clients
             {
                 return this._errorMessage;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 100))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._errorMessage = value;
-            }
         }
 
         private int _total;
@@ -970,10 +748,6 @@ namespace RushQuant.Clients
             {
                 return this._total;
             }
-            set
-            {
-                this._total = value;
-            }
         }
         private int _count;
         public int Count
@@ -981,10 +755,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._count;
-            }
-            set
-            {
-                this._count = value;
             }
         }
         private QuerySecurityCapitalInfoOutputItem[] _items;
@@ -994,10 +764,11 @@ namespace RushQuant.Clients
             {
                 return this._items;
             }
-            set
-            {
-                this._items = value;
-            }
+        }
+
+        internal static int GetSize()
+        {
+            return 116;
         }
 
         internal unsafe void ReadFrom(IntPtr pointer)
@@ -1054,15 +825,6 @@ namespace RushQuant.Clients
             {
                 return this._exchangeId;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 10))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._exchangeId = value;
-            }
         }
         private string _instrumentCode;
         /// <summary>合约代码</summary>
@@ -1071,15 +833,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._instrumentCode;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 16))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._instrumentCode = value;
             }
         }
         private string _instrumentName;
@@ -1090,15 +843,6 @@ namespace RushQuant.Clients
             {
                 return this._instrumentName;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 32))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._instrumentName = value;
-            }
         }
         private int _volume;
         public int Volume
@@ -1106,10 +850,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._volume;
-            }
-            set
-            {
-                this._volume = value;
             }
         }
         private int _availableVolume;
@@ -1119,10 +859,6 @@ namespace RushQuant.Clients
             {
                 return this._availableVolume;
             }
-            set
-            {
-                this._availableVolume = value;
-            }
         }
         private string _stockholderCode;
         /// <summary>股东代码</summary>
@@ -1131,15 +867,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._stockholderCode;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 12))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._stockholderCode = value;
             }
         }
 
@@ -1161,15 +888,11 @@ namespace RushQuant.Clients
     public sealed class QuerySecurityPositionInfoOutput
     {
         private uint _size;
-        public uint Size
+        internal uint Size
         {
             get
             {
                 return this._size;
-            }
-            set
-            {
-                this._size = value;
             }
         }
         private int _id;
@@ -1178,10 +901,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._id;
-            }
-            set
-            {
-                this._id = value;
             }
         }
         private string _errorMessage;
@@ -1192,15 +911,6 @@ namespace RushQuant.Clients
             {
                 return this._errorMessage;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 100))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._errorMessage = value;
-            }
         }
 
         private int _total;
@@ -1210,10 +920,6 @@ namespace RushQuant.Clients
             {
                 return this._total;
             }
-            set
-            {
-                this._total = value;
-            }
         }
         private int _count;
         public int Count
@@ -1221,10 +927,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._count;
-            }
-            set
-            {
-                this._count = value;
             }
         }
         private QuerySecurityPositionInfoOutputItem[] _items;
@@ -1234,10 +936,11 @@ namespace RushQuant.Clients
             {
                 return this._items;
             }
-            set
-            {
-                this._items = value;
-            }
+        }
+
+        internal static int GetSize()
+        {
+            return 116;
         }
 
         internal unsafe void ReadFrom(IntPtr pointer)
@@ -1365,15 +1068,11 @@ namespace RushQuant.Clients
     public sealed class QuerySecurityOrderEvaluationOutput
     {
         private uint _size;
-        public uint Size
+        internal uint Size
         {
             get
             {
                 return this._size;
-            }
-            set
-            {
-                this._size = value;
             }
         }
         private int _id;
@@ -1382,10 +1081,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._id;
-            }
-            set
-            {
-                this._id = value;
             }
         }
         private string _errorMessage;
@@ -1396,15 +1091,6 @@ namespace RushQuant.Clients
             {
                 return this._errorMessage;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 100))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._errorMessage = value;
-            }
         }
 
         private double _bidableVolume;
@@ -1414,10 +1100,11 @@ namespace RushQuant.Clients
             {
                 return this._bidableVolume;
             }
-            set
-            {
-                this._bidableVolume = value;
-            }
+        }
+
+        internal static int GetSize()
+        {
+            return 116;
         }
 
         internal unsafe void ReadFrom(IntPtr pointer)
@@ -1479,10 +1166,6 @@ namespace RushQuant.Clients
             {
                 return this._orderDate;
             }
-            set
-            {
-                this._orderDate = value;
-            }
         }
         private int _orderTime;
         public int OrderTime
@@ -1490,10 +1173,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._orderTime;
-            }
-            set
-            {
-                this._orderTime = value;
             }
         }
         private string _orderID;
@@ -1504,15 +1183,6 @@ namespace RushQuant.Clients
             {
                 return this._orderID;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 20))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._orderID = value;
-            }
         }
         private string _stockholderCode;
         /// <summary>股东代码</summary>
@@ -1521,15 +1191,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._stockholderCode;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 12))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._stockholderCode = value;
             }
         }
         private string _exchangeId;
@@ -1540,15 +1201,6 @@ namespace RushQuant.Clients
             {
                 return this._exchangeId;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 10))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._exchangeId = value;
-            }
         }
         private string _instrumentCode;
         /// <summary>合约代码</summary>
@@ -1557,15 +1209,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._instrumentCode;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 16))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._instrumentCode = value;
             }
         }
         private string _instrumentName;
@@ -1576,15 +1219,6 @@ namespace RushQuant.Clients
             {
                 return this._instrumentName;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 32))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._instrumentName = value;
-            }
         }
         private int _tradeFlag;
         public int TradeFlag
@@ -1592,10 +1226,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._tradeFlag;
-            }
-            set
-            {
-                this._tradeFlag = value;
             }
         }
         private double _orderPrice;
@@ -1605,10 +1235,6 @@ namespace RushQuant.Clients
             {
                 return this._orderPrice;
             }
-            set
-            {
-                this._orderPrice = value;
-            }
         }
         private int _orderVolume;
         public int OrderVolume
@@ -1616,10 +1242,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._orderVolume;
-            }
-            set
-            {
-                this._orderVolume = value;
             }
         }
         private double _dealPrice;
@@ -1629,10 +1251,6 @@ namespace RushQuant.Clients
             {
                 return this._dealPrice;
             }
-            set
-            {
-                this._dealPrice = value;
-            }
         }
         private int _dealVolume;
         public int DealVolume
@@ -1640,10 +1258,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._dealVolume;
-            }
-            set
-            {
-                this._dealVolume = value;
             }
         }
         private int _cancelVolume;
@@ -1653,10 +1267,6 @@ namespace RushQuant.Clients
             {
                 return this._cancelVolume;
             }
-            set
-            {
-                this._cancelVolume = value;
-            }
         }
         private int _quoteType;
         public int QuoteType
@@ -1665,10 +1275,6 @@ namespace RushQuant.Clients
             {
                 return this._quoteType;
             }
-            set
-            {
-                this._quoteType = value;
-            }
         }
         private int _orderStatus;
         public int OrderStatus
@@ -1676,10 +1282,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._orderStatus;
-            }
-            set
-            {
-                this._orderStatus = value;
             }
         }
 
@@ -1710,15 +1312,11 @@ namespace RushQuant.Clients
     public sealed class QuerySecurityIntradayOrderOutput
     {
         private uint _size;
-        public uint Size
+        internal uint Size
         {
             get
             {
                 return this._size;
-            }
-            set
-            {
-                this._size = value;
             }
         }
         private int _id;
@@ -1727,10 +1325,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._id;
-            }
-            set
-            {
-                this._id = value;
             }
         }
         private string _errorMessage;
@@ -1741,15 +1335,6 @@ namespace RushQuant.Clients
             {
                 return this._errorMessage;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 100))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._errorMessage = value;
-            }
         }
 
         private int _total;
@@ -1759,10 +1344,6 @@ namespace RushQuant.Clients
             {
                 return this._total;
             }
-            set
-            {
-                this._total = value;
-            }
         }
         private int _count;
         public int Count
@@ -1770,10 +1351,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._count;
-            }
-            set
-            {
-                this._count = value;
             }
         }
         private QuerySecurityIntradayOrderOutputItem[] _items;
@@ -1783,10 +1360,11 @@ namespace RushQuant.Clients
             {
                 return this._items;
             }
-            set
-            {
-                this._items = value;
-            }
+        }
+
+        internal static int GetSize()
+        {
+            return 116;
         }
 
         internal unsafe void ReadFrom(IntPtr pointer)
@@ -1882,10 +1460,6 @@ namespace RushQuant.Clients
             {
                 return this._orderDate;
             }
-            set
-            {
-                this._orderDate = value;
-            }
         }
         private int _orderTime;
         public int OrderTime
@@ -1893,10 +1467,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._orderTime;
-            }
-            set
-            {
-                this._orderTime = value;
             }
         }
         private string _orderID;
@@ -1907,15 +1477,6 @@ namespace RushQuant.Clients
             {
                 return this._orderID;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 20))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._orderID = value;
-            }
         }
         private string _stockholderCode;
         /// <summary>股东代码</summary>
@@ -1924,15 +1485,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._stockholderCode;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 12))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._stockholderCode = value;
             }
         }
         private string _exchangeId;
@@ -1943,15 +1495,6 @@ namespace RushQuant.Clients
             {
                 return this._exchangeId;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 10))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._exchangeId = value;
-            }
         }
         private string _instrumentCode;
         /// <summary>合约代码</summary>
@@ -1960,15 +1503,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._instrumentCode;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 16))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._instrumentCode = value;
             }
         }
         private string _instrumentName;
@@ -1979,15 +1513,6 @@ namespace RushQuant.Clients
             {
                 return this._instrumentName;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 32))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._instrumentName = value;
-            }
         }
         private int _tradeFlag;
         public int TradeFlag
@@ -1995,10 +1520,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._tradeFlag;
-            }
-            set
-            {
-                this._tradeFlag = value;
             }
         }
         private double _orderPrice;
@@ -2008,10 +1529,6 @@ namespace RushQuant.Clients
             {
                 return this._orderPrice;
             }
-            set
-            {
-                this._orderPrice = value;
-            }
         }
         private int _orderVolume;
         public int OrderVolume
@@ -2019,10 +1536,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._orderVolume;
-            }
-            set
-            {
-                this._orderVolume = value;
             }
         }
         private int _dealVolume;
@@ -2032,10 +1545,6 @@ namespace RushQuant.Clients
             {
                 return this._dealVolume;
             }
-            set
-            {
-                this._dealVolume = value;
-            }
         }
         private double _dealAmount;
         public double DealAmount
@@ -2043,10 +1552,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._dealAmount;
-            }
-            set
-            {
-                this._dealAmount = value;
             }
         }
         private int _cancelVolume;
@@ -2056,10 +1561,6 @@ namespace RushQuant.Clients
             {
                 return this._cancelVolume;
             }
-            set
-            {
-                this._cancelVolume = value;
-            }
         }
         private int _quoteType;
         public int QuoteType
@@ -2068,10 +1569,6 @@ namespace RushQuant.Clients
             {
                 return this._quoteType;
             }
-            set
-            {
-                this._quoteType = value;
-            }
         }
         private int _orderStatus;
         public int OrderStatus
@@ -2079,10 +1576,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._orderStatus;
-            }
-            set
-            {
-                this._orderStatus = value;
             }
         }
 
@@ -2113,15 +1606,11 @@ namespace RushQuant.Clients
     public sealed class QuerySecurityHistoricalOrderOutput
     {
         private uint _size;
-        public uint Size
+        internal uint Size
         {
             get
             {
                 return this._size;
-            }
-            set
-            {
-                this._size = value;
             }
         }
         private int _id;
@@ -2130,10 +1619,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._id;
-            }
-            set
-            {
-                this._id = value;
             }
         }
         private string _errorMessage;
@@ -2144,15 +1629,6 @@ namespace RushQuant.Clients
             {
                 return this._errorMessage;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 100))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._errorMessage = value;
-            }
         }
 
         private int _total;
@@ -2162,10 +1638,6 @@ namespace RushQuant.Clients
             {
                 return this._total;
             }
-            set
-            {
-                this._total = value;
-            }
         }
         private int _count;
         public int Count
@@ -2173,10 +1645,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._count;
-            }
-            set
-            {
-                this._count = value;
             }
         }
         private QuerySecurityHistoricalOrderOutputItem[] _items;
@@ -2186,10 +1654,11 @@ namespace RushQuant.Clients
             {
                 return this._items;
             }
-            set
-            {
-                this._items = value;
-            }
+        }
+
+        internal static int GetSize()
+        {
+            return 116;
         }
 
         internal unsafe void ReadFrom(IntPtr pointer)
@@ -2259,10 +1728,6 @@ namespace RushQuant.Clients
             {
                 return this._dealTime;
             }
-            set
-            {
-                this._dealTime = value;
-            }
         }
         private string _dealID;
         /// <summary>成交编号</summary>
@@ -2271,15 +1736,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._dealID;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 20))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._dealID = value;
             }
         }
         private string _orderID;
@@ -2290,15 +1746,6 @@ namespace RushQuant.Clients
             {
                 return this._orderID;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 20))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._orderID = value;
-            }
         }
         private string _quoteNumber;
         /// <summary>申报编号</summary>
@@ -2307,15 +1754,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._quoteNumber;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 20))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._quoteNumber = value;
             }
         }
         private string _stockholderCode;
@@ -2326,15 +1764,6 @@ namespace RushQuant.Clients
             {
                 return this._stockholderCode;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 12))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._stockholderCode = value;
-            }
         }
         private string _exchangeId;
         /// <summary>交易所代码</summary>
@@ -2343,15 +1772,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._exchangeId;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 10))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._exchangeId = value;
             }
         }
         private string _instrumentCode;
@@ -2362,15 +1782,6 @@ namespace RushQuant.Clients
             {
                 return this._instrumentCode;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 16))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._instrumentCode = value;
-            }
         }
         private string _instrumentName;
         /// <summary>合约名称</summary>
@@ -2380,15 +1791,6 @@ namespace RushQuant.Clients
             {
                 return this._instrumentName;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 32))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._instrumentName = value;
-            }
         }
         private int _tradeFlag;
         public int TradeFlag
@@ -2396,10 +1798,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._tradeFlag;
-            }
-            set
-            {
-                this._tradeFlag = value;
             }
         }
         private double _dealPrice;
@@ -2409,10 +1807,6 @@ namespace RushQuant.Clients
             {
                 return this._dealPrice;
             }
-            set
-            {
-                this._dealPrice = value;
-            }
         }
         private int _dealVolume;
         public int DealVolume
@@ -2420,10 +1814,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._dealVolume;
-            }
-            set
-            {
-                this._dealVolume = value;
             }
         }
 
@@ -2450,15 +1840,11 @@ namespace RushQuant.Clients
     public sealed class QuerySecurityIntradayDealOutput
     {
         private uint _size;
-        public uint Size
+        internal uint Size
         {
             get
             {
                 return this._size;
-            }
-            set
-            {
-                this._size = value;
             }
         }
         private int _id;
@@ -2467,10 +1853,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._id;
-            }
-            set
-            {
-                this._id = value;
             }
         }
         private string _errorMessage;
@@ -2481,15 +1863,6 @@ namespace RushQuant.Clients
             {
                 return this._errorMessage;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 100))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._errorMessage = value;
-            }
         }
 
         private int _total;
@@ -2499,10 +1872,6 @@ namespace RushQuant.Clients
             {
                 return this._total;
             }
-            set
-            {
-                this._total = value;
-            }
         }
         private int _count;
         public int Count
@@ -2510,10 +1879,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._count;
-            }
-            set
-            {
-                this._count = value;
             }
         }
         private QuerySecurityIntradayDealOutputItem[] _items;
@@ -2523,10 +1888,11 @@ namespace RushQuant.Clients
             {
                 return this._items;
             }
-            set
-            {
-                this._items = value;
-            }
+        }
+
+        internal static int GetSize()
+        {
+            return 116;
         }
 
         internal unsafe void ReadFrom(IntPtr pointer)
@@ -2622,10 +1988,6 @@ namespace RushQuant.Clients
             {
                 return this._dealDate;
             }
-            set
-            {
-                this._dealDate = value;
-            }
         }
         private int _dealTime;
         public int DealTime
@@ -2633,10 +1995,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._dealTime;
-            }
-            set
-            {
-                this._dealTime = value;
             }
         }
         private string _dealID;
@@ -2647,15 +2005,6 @@ namespace RushQuant.Clients
             {
                 return this._dealID;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 20))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._dealID = value;
-            }
         }
         private string _stockholderCode;
         /// <summary>股东代码</summary>
@@ -2664,15 +2013,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._stockholderCode;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 12))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._stockholderCode = value;
             }
         }
         private string _exchangeId;
@@ -2683,15 +2023,6 @@ namespace RushQuant.Clients
             {
                 return this._exchangeId;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 10))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._exchangeId = value;
-            }
         }
         private string _instrumentCode;
         /// <summary>合约代码</summary>
@@ -2700,15 +2031,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._instrumentCode;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 16))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._instrumentCode = value;
             }
         }
         private string _instrumentName;
@@ -2719,15 +2041,6 @@ namespace RushQuant.Clients
             {
                 return this._instrumentName;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 32))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._instrumentName = value;
-            }
         }
         private int _tradeFlag;
         public int TradeFlag
@@ -2735,10 +2048,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._tradeFlag;
-            }
-            set
-            {
-                this._tradeFlag = value;
             }
         }
         private double _dealPrice;
@@ -2748,10 +2057,6 @@ namespace RushQuant.Clients
             {
                 return this._dealPrice;
             }
-            set
-            {
-                this._dealPrice = value;
-            }
         }
         private int _dealVolume;
         public int DealVolume
@@ -2759,10 +2064,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._dealVolume;
-            }
-            set
-            {
-                this._dealVolume = value;
             }
         }
 
@@ -2788,15 +2089,11 @@ namespace RushQuant.Clients
     public sealed class QuerySecurityHistoricalDealOutput
     {
         private uint _size;
-        public uint Size
+        internal uint Size
         {
             get
             {
                 return this._size;
-            }
-            set
-            {
-                this._size = value;
             }
         }
         private int _id;
@@ -2805,10 +2102,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._id;
-            }
-            set
-            {
-                this._id = value;
             }
         }
         private string _errorMessage;
@@ -2819,15 +2112,6 @@ namespace RushQuant.Clients
             {
                 return this._errorMessage;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 100))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._errorMessage = value;
-            }
         }
 
         private int _total;
@@ -2837,10 +2121,6 @@ namespace RushQuant.Clients
             {
                 return this._total;
             }
-            set
-            {
-                this._total = value;
-            }
         }
         private int _count;
         public int Count
@@ -2848,10 +2128,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._count;
-            }
-            set
-            {
-                this._count = value;
             }
         }
         private QuerySecurityHistoricalDealOutputItem[] _items;
@@ -2861,10 +2137,11 @@ namespace RushQuant.Clients
             {
                 return this._items;
             }
-            set
-            {
-                this._items = value;
-            }
+        }
+
+        internal static int GetSize()
+        {
+            return 116;
         }
 
         internal unsafe void ReadFrom(IntPtr pointer)
@@ -3006,15 +2283,11 @@ namespace RushQuant.Clients
     public sealed class PostSecuritySubmitOrderOutput
     {
         private uint _size;
-        public uint Size
+        internal uint Size
         {
             get
             {
                 return this._size;
-            }
-            set
-            {
-                this._size = value;
             }
         }
         private int _id;
@@ -3024,10 +2297,6 @@ namespace RushQuant.Clients
             {
                 return this._id;
             }
-            set
-            {
-                this._id = value;
-            }
         }
         private string _errorMessage;
         /// <summary>错误消息</summary>
@@ -3036,15 +2305,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._errorMessage;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 100))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._errorMessage = value;
             }
         }
 
@@ -3056,15 +2316,11 @@ namespace RushQuant.Clients
             {
                 return this._orderID;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 20))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
+        }
 
-                this._orderID = value;
-            }
+        internal static int GetSize()
+        {
+            return 128;
         }
 
         internal unsafe void ReadFrom(IntPtr pointer)
@@ -3145,15 +2401,11 @@ namespace RushQuant.Clients
     public sealed class PostSecurityCancelOrderOutput
     {
         private uint _size;
-        public uint Size
+        internal uint Size
         {
             get
             {
                 return this._size;
-            }
-            set
-            {
-                this._size = value;
             }
         }
         private int _id;
@@ -3163,10 +2415,6 @@ namespace RushQuant.Clients
             {
                 return this._id;
             }
-            set
-            {
-                this._id = value;
-            }
         }
         private string _errorMessage;
         /// <summary>错误消息</summary>
@@ -3175,15 +2423,6 @@ namespace RushQuant.Clients
             get
             {
                 return this._errorMessage;
-            }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 100))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this._errorMessage = value;
             }
         }
 
@@ -3195,15 +2434,11 @@ namespace RushQuant.Clients
             {
                 return this._orderID;
             }
-            set
-            {
-                if ((value != null) && (PInvokeHelper.DefaultEncoding.GetByteCount(value) + 1 > 20))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
+        }
 
-                this._orderID = value;
-            }
+        internal static int GetSize()
+        {
+            return 128;
         }
 
         internal unsafe void ReadFrom(IntPtr pointer)

@@ -3,7 +3,7 @@ using System;
 namespace RushQuant.Clients
 {
     /// <summary>错误代码</summary>
-    public class ErrorCode
+    public static class ErrorCode
     {
         /// <summary>成功</summary>
         public const int Success = 0;

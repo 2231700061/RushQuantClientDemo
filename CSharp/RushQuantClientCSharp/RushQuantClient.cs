@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace RushQuant.Clients
@@ -33,6 +34,8 @@ namespace RushQuant.Clients
 
     public class RushQuantTradeClient : RushQuantClient
     {
+        public static int MAX_ACCOUNT = 100;
+
         public static RushQuantTradeClient Create(int accountId)
         {
             if (!RushQuantClient.Initialized)
@@ -49,6 +52,33 @@ namespace RushQuant.Clients
             {
                 return null;
             }
+
+            IntPtr pointer = IntPtr.Zero;
+            try
+            {
+                pointer = Marshal.AllocHGlobal(sizeof(int) * MAX_ACCOUNT);
+                if (pointer == IntPtr.Zero)
+                {
+                    return null;
+                }
+
+                int count = UnsafeNativeMethods.rushquant_trade_GetAccountList(pointer);
+                int[] accountIds = new int[count];
+                Marshal.Copy(pointer, accountIds, 0, count);
+                return accountIds;
+            }
+            finally
+            {
+                if (pointer != IntPtr.Zero)
+                {
+                    Marshal.FreeHGlobal(pointer);
+                }
+            }
+        }
+
+        public static void Free(IntPtr pointer)
+        {
+            UnsafeNativeMethods.rushquant_free(pointer);
         }
 
         private int _accountId;
@@ -64,6 +94,56 @@ namespace RushQuant.Clients
         {
             this._accountId = accountId;
         }
+
+        public int Reset()
+        {
+            return UnsafeNativeMethods.rushquant_trade_Reset(this._accountId);
+        }
+
+        public int NextId()
+        {
+            return UnsafeNativeMethods.rushquant_trade_NextId(this._accountId);
+        }
+
+        public LoginOutput Login(LoginInput input)
+        {
+            IntPtr pInput = IntPtr.Zero;
+            IntPtr pOutput = IntPtr.Zero;
+            try
+            {
+                pInput = Marshal.AllocHGlobal(LoginInput.GetSize());
+                if (pInput == IntPtr.Zero)
+                {
+                    return null;
+                }
+                pOutput = Marshal.AllocHGlobal(LoginOutput.GetSize());
+                if (pOutput == IntPtr.Zero)
+                {
+                    return null;
+                }
+
+                int result = UnsafeNativeMethods.rushquant_trade_Login(this._accountId, pInput, pOutput);
+                LoginOutput output = new LoginOutput();
+                output.ReadFrom(pOutput);
+                if (result != ErrorCode.Success)
+                {
+                    throw new RushQuantClientException(result, output.ErrorMessage);
+                }
+                return output;
+            }
+            finally
+            {
+                if (pInput != IntPtr.Zero)
+                {
+                    Marshal.FreeHGlobal(pInput);
+                }
+                if (pOutput != IntPtr.Zero)
+                {
+                    Marshal.FreeHGlobal(pOutput);
+                }
+            }
+        }
+
     }
 
 }

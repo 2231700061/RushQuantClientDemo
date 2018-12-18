@@ -32,7 +32,11 @@ namespace RushQuantClientDemo
                 return -1;
             }
 
-            RushQuantClient client = RushQuantClient.Create(Convert.ToInt32(__accountId));
+            var c = RushQuantTradeClient.GetAccountList();
+
+            RushQuantTradeClient client = RushQuantTradeClient.Create(Convert.ToInt32(__accountId));
+            client.Reset();
+           var result =  client.Login(new LoginInput() { TradePassword = __password });
             //// reset account
             //result = rushquant_trade_Reset(g_AccountId);
             //if (result != Error_Success)
