@@ -340,6 +340,8 @@ $@"交易所名称:{item.ExchangeId}, 合约代码:{item.InstrumentCode}, 合约
 
         static int Main(string[] args)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             // TODO: Read config from args
             if (args.Length == 4)
             {
@@ -362,7 +364,7 @@ $@"交易所名称:{item.ExchangeId}, 合约代码:{item.InstrumentCode}, 合约
             {
                 client.Login(new LoginInput() { TradePassword = __password });
 
-                //Test_QueryTickData(client);
+                Test_QueryTickData(client);
                 //Test_QueryStockholderInfo(client);
                 //Test_QuerySecurityCapitalInfo(client);
                 //Test_QuerySecurityPositionInfo(client);
@@ -375,7 +377,7 @@ $@"交易所名称:{item.ExchangeId}, 合约代码:{item.InstrumentCode}, 合约
 
                 //Test_PostSecuritySubmitOrder(client);
                 //Test_PostSecuritySubmitOrder_Purchase(client);
-                Test_PostSecurityCancelOrder(client);
+                //Test_PostSecurityCancelOrder(client);
 
                 //for (int i = 0; i < 20; i++)
                 //{
@@ -391,6 +393,7 @@ $@"交易所名称:{item.ExchangeId}, 合约代码:{item.InstrumentCode}, 合约
             }
 
             RushQuantClient.Dispose();
+            Console.Read();
 
             return 0;
         }
