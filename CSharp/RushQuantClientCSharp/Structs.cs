@@ -101,9 +101,8 @@ namespace RushQuant.Clients
             return 28;
         }
 
-        internal unsafe void WriteTo(IntPtr pointer)
+        internal unsafe void WriteTo(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             *(int*)p = this._id; p += 4;
             PInvokeHelper.WriteString(this._tradePassword, p, 12); p += 12;
             PInvokeHelper.WriteString(this._communicationPassword, p, 12); p += 12;
@@ -142,9 +141,8 @@ namespace RushQuant.Clients
             return 108;
         }
 
-        internal unsafe void ReadFrom(IntPtr pointer)
+        internal unsafe void ReadFrom(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
@@ -208,9 +206,8 @@ namespace RushQuant.Clients
             return 30;
         }
 
-        internal unsafe void WriteTo(IntPtr pointer)
+        internal unsafe void WriteTo(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             *(int*)p = this._id; p += 4;
             PInvokeHelper.WriteString(this._exchangeId, p, 10); p += 10;
             PInvokeHelper.WriteString(this._instrumentCode, p, 16); p += 16;
@@ -461,9 +458,8 @@ namespace RushQuant.Clients
             return 310;
         }
 
-        internal unsafe void ReadFrom(IntPtr pointer)
+        internal unsafe void ReadFrom(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
@@ -516,9 +512,8 @@ namespace RushQuant.Clients
             return 4;
         }
 
-        internal unsafe void WriteTo(IntPtr pointer)
+        internal unsafe void WriteTo(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             *(int*)p = this._id; p += 4;
         }
     }
@@ -612,9 +607,8 @@ namespace RushQuant.Clients
             return 116;
         }
 
-        internal unsafe void ReadFrom(IntPtr pointer)
+        internal unsafe void ReadFrom(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
@@ -650,9 +644,8 @@ namespace RushQuant.Clients
             return 4;
         }
 
-        internal unsafe void WriteTo(IntPtr pointer)
+        internal unsafe void WriteTo(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             *(int*)p = this._id; p += 4;
         }
     }
@@ -771,9 +764,8 @@ namespace RushQuant.Clients
             return 116;
         }
 
-        internal unsafe void ReadFrom(IntPtr pointer)
+        internal unsafe void ReadFrom(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
@@ -809,9 +801,8 @@ namespace RushQuant.Clients
             return 4;
         }
 
-        internal unsafe void WriteTo(IntPtr pointer)
+        internal unsafe void WriteTo(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             *(int*)p = this._id; p += 4;
         }
     }
@@ -943,9 +934,8 @@ namespace RushQuant.Clients
             return 116;
         }
 
-        internal unsafe void ReadFrom(IntPtr pointer)
+        internal unsafe void ReadFrom(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
@@ -1054,9 +1044,8 @@ namespace RushQuant.Clients
             return 54;
         }
 
-        internal unsafe void WriteTo(IntPtr pointer)
+        internal unsafe void WriteTo(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             *(int*)p = this._id; p += 4;
             PInvokeHelper.WriteString(this._exchangeId, p, 10); p += 10;
             PInvokeHelper.WriteString(this._instrumentCode, p, 16); p += 16;
@@ -1107,9 +1096,8 @@ namespace RushQuant.Clients
             return 116;
         }
 
-        internal unsafe void ReadFrom(IntPtr pointer)
+        internal unsafe void ReadFrom(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
@@ -1150,9 +1138,8 @@ namespace RushQuant.Clients
             return 8;
         }
 
-        internal unsafe void WriteTo(IntPtr pointer)
+        internal unsafe void WriteTo(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             *(int*)p = this._id; p += 4;
             *(int*)p = this._beginNumber; p += 4;
         }
@@ -1367,9 +1354,8 @@ namespace RushQuant.Clients
             return 116;
         }
 
-        internal unsafe void ReadFrom(IntPtr pointer)
+        internal unsafe void ReadFrom(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
@@ -1442,9 +1428,8 @@ namespace RushQuant.Clients
             return 16;
         }
 
-        internal unsafe void WriteTo(IntPtr pointer)
+        internal unsafe void WriteTo(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             *(int*)p = this._id; p += 4;
             *(int*)p = this._beginDate; p += 4;
             *(int*)p = this._endDate; p += 4;
@@ -1661,9 +1646,8 @@ namespace RushQuant.Clients
             return 116;
         }
 
-        internal unsafe void ReadFrom(IntPtr pointer)
+        internal unsafe void ReadFrom(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
@@ -1712,15 +1696,22 @@ namespace RushQuant.Clients
             return 8;
         }
 
-        internal unsafe void WriteTo(IntPtr pointer)
+        internal unsafe void WriteTo(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             *(int*)p = this._id; p += 4;
             *(int*)p = this._beginNumber; p += 4;
         }
     }
     public sealed class QuerySecurityIntradayDealOutputItem
     {
+        private int _dealDate;
+        public int DealDate
+        {
+            get
+            {
+                return this._dealDate;
+            }
+        }
         private int _dealTime;
         public int DealTime
         {
@@ -1819,11 +1810,12 @@ namespace RushQuant.Clients
 
         internal static int GetSize()
         {
-            return 150;
+            return 154;
         }
 
         internal unsafe void ReadFrom(byte* p)
         {
+            this._dealDate = *(int*)p; p += 4;
             this._dealTime = *(int*)p; p += 4;
             this._dealID = PInvokeHelper.ReadString(p, 20); p += 20;
             this._orderID = PInvokeHelper.ReadString(p, 20); p += 20;
@@ -1895,9 +1887,8 @@ namespace RushQuant.Clients
             return 116;
         }
 
-        internal unsafe void ReadFrom(IntPtr pointer)
+        internal unsafe void ReadFrom(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
@@ -1970,9 +1961,8 @@ namespace RushQuant.Clients
             return 16;
         }
 
-        internal unsafe void WriteTo(IntPtr pointer)
+        internal unsafe void WriteTo(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             *(int*)p = this._id; p += 4;
             *(int*)p = this._beginDate; p += 4;
             *(int*)p = this._endDate; p += 4;
@@ -2144,9 +2134,8 @@ namespace RushQuant.Clients
             return 116;
         }
 
-        internal unsafe void ReadFrom(IntPtr pointer)
+        internal unsafe void ReadFrom(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
@@ -2268,9 +2257,8 @@ namespace RushQuant.Clients
             return 50;
         }
 
-        internal unsafe void WriteTo(IntPtr pointer)
+        internal unsafe void WriteTo(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             *(int*)p = this._id; p += 4;
             PInvokeHelper.WriteString(this._exchangeId, p, 10); p += 10;
             PInvokeHelper.WriteString(this._instrumentCode, p, 16); p += 16;
@@ -2323,9 +2311,8 @@ namespace RushQuant.Clients
             return 128;
         }
 
-        internal unsafe void ReadFrom(IntPtr pointer)
+        internal unsafe void ReadFrom(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
@@ -2390,9 +2377,8 @@ namespace RushQuant.Clients
             return 34;
         }
 
-        internal unsafe void WriteTo(IntPtr pointer)
+        internal unsafe void WriteTo(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             *(int*)p = this._id; p += 4;
             PInvokeHelper.WriteString(this._exchangeId, p, 10); p += 10;
             PInvokeHelper.WriteString(this._orderID, p, 20); p += 20;
@@ -2441,9 +2427,8 @@ namespace RushQuant.Clients
             return 128;
         }
 
-        internal unsafe void ReadFrom(IntPtr pointer)
+        internal unsafe void ReadFrom(byte* p)
         {
-            byte* p = (byte*)pointer.ToPointer();
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
