@@ -365,13 +365,13 @@ $@"交易所名称:{item.ExchangeId}, 合约代码:{item.InstrumentCode}, 合约
                 client.Login(new LoginInput() { TradePassword = __password });
 
                 Test_QueryTickData(client);
-                //Test_QueryStockholderInfo(client);
-                //Test_QuerySecurityCapitalInfo(client);
-                //Test_QuerySecurityPositionInfo(client);
-                //Test_QuerySecurityIntradayOrder(client);
-                //Test_QuerySecurityHistoricalOrder(client);
-                //Test_QuerySecurityIntradayDeal(client);
-                //Test_QuerySecurityHistoricalDeal(client);
+                Test_QueryStockholderInfo(client);
+                Test_QuerySecurityCapitalInfo(client);
+                Test_QuerySecurityPositionInfo(client);
+                Test_QuerySecurityIntradayOrder(client);
+                Test_QuerySecurityHistoricalOrder(client);
+                Test_QuerySecurityIntradayDeal(client);
+                Test_QuerySecurityHistoricalDeal(client);
                 //Test_QuerySecurityOrderEvaluation(client);
                 //Test_QuerySecurityOrderCapacity(client);
 
