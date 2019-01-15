@@ -16,7 +16,13 @@ namespace RushQuant.Clients
     {
         /// <summary>人民币</summary>
         [Description("人民币")]
-        RMB = 0,
+        RMB = 1,
+        /// <summary>港币</summary>
+        [Description("港币")]
+        HKD = 2,
+        /// <summary>美元</summary>
+        [Description("美元")]
+        USD = 3,
     }
 
     /// <summary>报价方式</summary>
@@ -116,45 +122,27 @@ namespace RushQuant.Clients
     /// <summary>委托状态</summary>
     public enum OrderStatus
     {
-        /// <summary>待撤：撤单指令还未报到场内。</summary>
-        [Description("待撤：撤单指令还未报到场内。")]
-        PendingCancel = 1,
-        /// <summary>正撤：撤单指令已送达公司，正在等待处理，此时不能确定是否已进场。</summary>
-        [Description("正撤：撤单指令已送达公司，正在等待处理，此时不能确定是否已进场。")]
-        Canceling = 2,
-        /// <summary>部撤：下单指令中的一部份数量已被撤消。</summary>
-        [Description("部撤：下单指令中的一部份数量已被撤消。")]
-        PartialCanceled = 3,
-        /// <summary>已撤：委托指令全部被撤消。</summary>
-        [Description("已撤：委托指令全部被撤消。")]
-        Canceled = 4,
-        /// <summary>未报：下单指令还未送入数据处理。</summary>
-        [Description("未报：下单指令还未送入数据处理。")]
-        Unquote = 5,
-        /// <summary>待报：下单指令还未被数据处理报到场内。</summary>
-        [Description("待报：下单指令还未被数据处理报到场内。")]
-        PendingQuote = 6,
-        /// <summary>正报：下单指令已送达公司，正在等待处理，此时不能确定是否已进场。</summary>
-        [Description("正报：下单指令已送达公司，正在等待处理，此时不能确定是否已进场。")]
-        Quoting = 7,
-        /// <summary>已报：已收到下单反馈。</summary>
-        [Description("已报：已收到下单反馈。")]
-        Quoted = 8,
-        /// <summary>部成：下单指令部份成交。</summary>
-        [Description("部成：下单指令部份成交。")]
-        PartialDealed = 9,
-        /// <summary>已成：下单指令全部成交。</summary>
-        [Description("已成：下单指令全部成交。")]
-        Dealed = 10,
-        /// <summary>撤废：撤单废单，表示撤单指令失败，原因可能是被撤的下单指令已经成交了或场内无法找到这条下单记录。</summary>
-        [Description("撤废：撤单废单，表示撤单指令失败，原因可能是被撤的下单指令已经成交了或场内无法找到这条下单记录。")]
-        CancelInvalid = 11,
-        /// <summary>废单：交易所反馈的信息，表示该定单无效。</summary>
-        [Description("废单：交易所反馈的信息，表示该定单无效。")]
-        Invalid = 12,
-        /// <summary>报撤：报单已经取消。</summary>
-        [Description("报撤：报单已经取消。")]
-        QuoteCanceled = 13,
+        /// <summary>未申报</summary>
+        [Description("未申报")]
+        Unorder = 1,
+        /// <summary>已申报未成交</summary>
+        [Description("已申报未成交")]
+        UndealtOrder = 3,
+        /// <summary>非法委托</summary>
+        [Description("非法委托")]
+        InvalidOrder = 4,
+        /// <summary>部分成交</summary>
+        [Description("部分成交")]
+        PartialDealt = 6,
+        /// <summary>全部成交</summary>
+        [Description("全部成交")]
+        AllDealt = 7,
+        /// <summary>部成部撤</summary>
+        [Description("部成部撤")]
+        PartialDealtPartialCancelled = 8,
+        /// <summary>全部撤单</summary>
+        [Description("全部撤单")]
+        AllCancelled = 9,
     }
 
 }

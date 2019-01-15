@@ -246,7 +246,7 @@ $@"交易所名称:{item.ExchangeId}, 合约代码:{item.InstrumentCode}, 合约
             QuerySecurityHistoricalOrderInput input = new QuerySecurityHistoricalOrderInput()
             {
                 BeginDate = 20181206,
-                EndDate = 20181213
+                EndDate = 20181231
             };
             QuerySecurityHistoricalOrderOutput output = client.QuerySecurityHistoricalOrder(input);
             Console.WriteLine($"{"委托日期",-10}{"委托时间",-10}{"委托编号",-10}{"股东代码",-10}{"交易所代码",-10}{"合约代码",-10}{"合约名称",-10}{"交易标志",-10}{"委托价格",-10}{"委托数量",-10}{"成交数量",-10}{"撤单数量",-10}{"报价类型",-10}{"状态",-10}");
@@ -372,10 +372,8 @@ $@"交易所名称:{item.ExchangeId}, 合约代码:{item.InstrumentCode}, 合约
                 Test_QuerySecurityHistoricalOrder(client);
                 Test_QuerySecurityIntradayDeal(client);
                 Test_QuerySecurityHistoricalDeal(client);
-                //Test_QuerySecurityOrderEvaluation(client);
-                //Test_QuerySecurityOrderCapacity(client);
 
-                //Test_PostSecuritySubmitOrder(client);
+                Test_PostSecuritySubmitOrder(client);
                 //Test_PostSecuritySubmitOrder_Purchase(client);
                 //Test_PostSecurityCancelOrder(client);
 

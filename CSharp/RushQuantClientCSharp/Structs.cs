@@ -577,14 +577,6 @@ namespace RushQuant.Clients
             }
         }
 
-        private int _total;
-        public int Total
-        {
-            get
-            {
-                return this._total;
-            }
-        }
         private int _count;
         public int Count
         {
@@ -604,7 +596,7 @@ namespace RushQuant.Clients
 
         internal static int GetSize()
         {
-            return 116;
+            return 112;
         }
 
         internal unsafe void ReadFrom(byte* p)
@@ -612,7 +604,6 @@ namespace RushQuant.Clients
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
-            this._total = *(int*)p; p += 4;
             this._count = *(int*)p; p += 4;
             this._items = new QueryStockholderInfoOutputItem[this._count];
             for (int i = 0; i < this._count; i++)
@@ -734,14 +725,6 @@ namespace RushQuant.Clients
             }
         }
 
-        private int _total;
-        public int Total
-        {
-            get
-            {
-                return this._total;
-            }
-        }
         private int _count;
         public int Count
         {
@@ -761,7 +744,7 @@ namespace RushQuant.Clients
 
         internal static int GetSize()
         {
-            return 116;
+            return 112;
         }
 
         internal unsafe void ReadFrom(byte* p)
@@ -769,7 +752,6 @@ namespace RushQuant.Clients
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
-            this._total = *(int*)p; p += 4;
             this._count = *(int*)p; p += 4;
             this._items = new QuerySecurityCapitalInfoOutputItem[this._count];
             for (int i = 0; i < this._count; i++)
@@ -904,14 +886,6 @@ namespace RushQuant.Clients
             }
         }
 
-        private int _total;
-        public int Total
-        {
-            get
-            {
-                return this._total;
-            }
-        }
         private int _count;
         public int Count
         {
@@ -931,7 +905,7 @@ namespace RushQuant.Clients
 
         internal static int GetSize()
         {
-            return 116;
+            return 112;
         }
 
         internal unsafe void ReadFrom(byte* p)
@@ -939,7 +913,6 @@ namespace RushQuant.Clients
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
-            this._total = *(int*)p; p += 4;
             this._count = *(int*)p; p += 4;
             this._items = new QuerySecurityPositionInfoOutputItem[this._count];
             for (int i = 0; i < this._count; i++)
@@ -1120,28 +1093,14 @@ namespace RushQuant.Clients
             }
         }
 
-        private int _beginNumber;
-        public int BeginNumber
-        {
-            get
-            {
-                return this._beginNumber;
-            }
-            set
-            {
-                this._beginNumber = value;
-            }
-        }
-
         internal static int GetSize()
         {
-            return 8;
+            return 4;
         }
 
         internal unsafe void WriteTo(byte* p)
         {
             *(int*)p = this._id; p += 4;
-            *(int*)p = this._beginNumber; p += 4;
         }
     }
     public sealed class QuerySecurityIntradayOrderOutputItem
@@ -1324,14 +1283,6 @@ namespace RushQuant.Clients
             }
         }
 
-        private int _total;
-        public int Total
-        {
-            get
-            {
-                return this._total;
-            }
-        }
         private int _count;
         public int Count
         {
@@ -1351,7 +1302,7 @@ namespace RushQuant.Clients
 
         internal static int GetSize()
         {
-            return 116;
+            return 112;
         }
 
         internal unsafe void ReadFrom(byte* p)
@@ -1359,7 +1310,6 @@ namespace RushQuant.Clients
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
-            this._total = *(int*)p; p += 4;
             this._count = *(int*)p; p += 4;
             this._items = new QuerySecurityIntradayOrderOutputItem[this._count];
             for (int i = 0; i < this._count; i++)
@@ -1410,22 +1360,10 @@ namespace RushQuant.Clients
                 this._endDate = value;
             }
         }
-        private int _beginNumber;
-        public int BeginNumber
-        {
-            get
-            {
-                return this._beginNumber;
-            }
-            set
-            {
-                this._beginNumber = value;
-            }
-        }
 
         internal static int GetSize()
         {
-            return 16;
+            return 12;
         }
 
         internal unsafe void WriteTo(byte* p)
@@ -1433,7 +1371,6 @@ namespace RushQuant.Clients
             *(int*)p = this._id; p += 4;
             *(int*)p = this._beginDate; p += 4;
             *(int*)p = this._endDate; p += 4;
-            *(int*)p = this._beginNumber; p += 4;
         }
     }
     public sealed class QuerySecurityHistoricalOrderOutputItem
@@ -1616,14 +1553,6 @@ namespace RushQuant.Clients
             }
         }
 
-        private int _total;
-        public int Total
-        {
-            get
-            {
-                return this._total;
-            }
-        }
         private int _count;
         public int Count
         {
@@ -1643,7 +1572,7 @@ namespace RushQuant.Clients
 
         internal static int GetSize()
         {
-            return 116;
+            return 112;
         }
 
         internal unsafe void ReadFrom(byte* p)
@@ -1651,7 +1580,6 @@ namespace RushQuant.Clients
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
-            this._total = *(int*)p; p += 4;
             this._count = *(int*)p; p += 4;
             this._items = new QuerySecurityHistoricalOrderOutputItem[this._count];
             for (int i = 0; i < this._count; i++)
@@ -1678,28 +1606,14 @@ namespace RushQuant.Clients
             }
         }
 
-        private int _beginNumber;
-        public int BeginNumber
-        {
-            get
-            {
-                return this._beginNumber;
-            }
-            set
-            {
-                this._beginNumber = value;
-            }
-        }
-
         internal static int GetSize()
         {
-            return 8;
+            return 4;
         }
 
         internal unsafe void WriteTo(byte* p)
         {
             *(int*)p = this._id; p += 4;
-            *(int*)p = this._beginNumber; p += 4;
         }
     }
     public sealed class QuerySecurityIntradayDealOutputItem
@@ -1857,14 +1771,6 @@ namespace RushQuant.Clients
             }
         }
 
-        private int _total;
-        public int Total
-        {
-            get
-            {
-                return this._total;
-            }
-        }
         private int _count;
         public int Count
         {
@@ -1884,7 +1790,7 @@ namespace RushQuant.Clients
 
         internal static int GetSize()
         {
-            return 116;
+            return 112;
         }
 
         internal unsafe void ReadFrom(byte* p)
@@ -1892,7 +1798,6 @@ namespace RushQuant.Clients
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
-            this._total = *(int*)p; p += 4;
             this._count = *(int*)p; p += 4;
             this._items = new QuerySecurityIntradayDealOutputItem[this._count];
             for (int i = 0; i < this._count; i++)
@@ -1943,22 +1848,10 @@ namespace RushQuant.Clients
                 this._endDate = value;
             }
         }
-        private int _beginNumber;
-        public int BeginNumber
-        {
-            get
-            {
-                return this._beginNumber;
-            }
-            set
-            {
-                this._beginNumber = value;
-            }
-        }
 
         internal static int GetSize()
         {
-            return 16;
+            return 12;
         }
 
         internal unsafe void WriteTo(byte* p)
@@ -1966,7 +1859,6 @@ namespace RushQuant.Clients
             *(int*)p = this._id; p += 4;
             *(int*)p = this._beginDate; p += 4;
             *(int*)p = this._endDate; p += 4;
-            *(int*)p = this._beginNumber; p += 4;
         }
     }
     public sealed class QuerySecurityHistoricalDealOutputItem
@@ -2104,14 +1996,6 @@ namespace RushQuant.Clients
             }
         }
 
-        private int _total;
-        public int Total
-        {
-            get
-            {
-                return this._total;
-            }
-        }
         private int _count;
         public int Count
         {
@@ -2131,7 +2015,7 @@ namespace RushQuant.Clients
 
         internal static int GetSize()
         {
-            return 116;
+            return 112;
         }
 
         internal unsafe void ReadFrom(byte* p)
@@ -2139,7 +2023,6 @@ namespace RushQuant.Clients
             this._size = *(uint*)p; p += 4;
             this._id = *(int*)p; p += 4;
             this._errorMessage = PInvokeHelper.ReadString(p, 100); p += 100;
-            this._total = *(int*)p; p += 4;
             this._count = *(int*)p; p += 4;
             this._items = new QuerySecurityHistoricalDealOutputItem[this._count];
             for (int i = 0; i < this._count; i++)

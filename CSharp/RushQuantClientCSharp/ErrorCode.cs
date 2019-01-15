@@ -14,7 +14,7 @@ namespace RushQuant.Clients
         public const int System_FailToInitializeSocket = 1002;
         /// <summary>没有有效的交易服务器</summary>
         public const int System_NotAvailableTradeServer = 1003;
-        /// <summary>获取远程数据出</summary>
+        /// <summary>获取远程数据出错</summary>
         public const int System_FailToFetchData = 1004;
         /// <summary>加载出错</summary>
         public const int System_FailToLoad = 1005;
