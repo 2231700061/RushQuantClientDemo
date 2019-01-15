@@ -19,7 +19,7 @@ namespace RushQuant.Clients
                 DescriptionAttribute attribute = ((DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)));
                 if (attribute != null)
                 {
-                    items.Add(value, attribute.Description);
+                    items.Add(value, $"{value}-{attribute.Description}");
                 }
             }
             return items;

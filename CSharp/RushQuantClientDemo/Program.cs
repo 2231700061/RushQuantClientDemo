@@ -58,6 +58,22 @@ namespace RushQuantClientDemo
             }
         }
 
+        private static Dictionary<int, string> __currencyDescriptions = ((Func<Dictionary<int, string>>)(() =>
+        {
+            Dictionary<int, string> items = DescriptionAttribute.GetDescriptions<Currency>();
+            return items;
+        }))();
+        public static string GetCurrencyText(int value)
+        {
+            if (!__currencyDescriptions.ContainsKey(value))
+            {
+                return "0-未知";
+            }
+
+            return __currencyDescriptions[value];
+        }
+
+
         private static Dictionary<int, string> __tradeDescriptions = ((Func<Dictionary<int, string>>)(() =>
         {
             Dictionary<int, string> items = DescriptionAttribute.GetDescriptions<TradeFlag>();
@@ -71,20 +87,6 @@ namespace RushQuantClientDemo
             }
 
             return __tradeDescriptions[value];
-
-            //switch (tradeFlag)
-            //{
-            //    case 1:
-            //        return "1-买入";
-            //    case 2:
-            //        return "2-卖出";
-            //    case 3:
-            //        return "3-申购";
-            //    case 4:
-            //        return "4-赎回";
-            //    default:
-            //        return "0-未知";
-            //}
         }
 
         private static Dictionary<int, string> __statusDescriptions = ((Func<Dictionary<int, string>>)(() =>
@@ -194,7 +196,7 @@ $@"交易所名称:{item.ExchangeId}, 合约代码:{item.InstrumentCode}, 合约
             for (int i = 0; i < output.Count; i++)
             {
                 QuerySecurityCapitalInfoOutputItem item = output.Items[i];
-                Console.WriteLine($"{item.Currency,-22}\t{item.RemainingCapitalAmount,-26}\t{item.AvailableCapitalAmount,-26}\t{item.WithdrawableCapitalAmount,-26}\t{item.TotalAssetAmount,-26}");
+                Console.WriteLine($"{GetCurrencyText(item.Currency),-22}\t{item.RemainingCapitalAmount,-26}\t{item.AvailableCapitalAmount,-26}\t{item.WithdrawableCapitalAmount,-26}\t{item.TotalAssetAmount,-26}");
             }
             Console.WriteLine("******* QuerySecurityCapitalInfo END *********\n");
             Console.WriteLine();
@@ -245,7 +247,7 @@ $@"交易所名称:{item.ExchangeId}, 合约代码:{item.InstrumentCode}, 合约
 
             QuerySecurityHistoricalOrderInput input = new QuerySecurityHistoricalOrderInput()
             {
-                BeginDate = 20181206,
+                BeginDate = 20181224,
                 EndDate = 20181231
             };
             QuerySecurityHistoricalOrderOutput output = client.QuerySecurityHistoricalOrder(input);
