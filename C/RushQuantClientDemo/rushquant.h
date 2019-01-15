@@ -15,7 +15,9 @@ typedef int BOOL;
 #define ExchangeId_SZE "SZE"         /* 深圳证券交易所 */
 
 /* 货币代码 */
-#define Currency_RMB 0                            /* 人民币 */
+#define Currency_RMB 1                            /* 人民币 */
+#define Currency_HKD 2                            /* 港币 */
+#define Currency_USD 3                            /* 美元 */
 
 /* 报价方式 */
 #define QuoteType_SSE_LimitPrice 1                 /*上海: 限价委托*/
@@ -50,24 +52,18 @@ typedef int BOOL;
 #define TradeFlag_CancelSell -2         /* 撤卖 */
 
 /* 委托状态 */
-#define OrderStatus_PendingCancel 1       /* 待撤：撤单指令还未报到场内。 */
-#define OrderStatus_Canceling 2           /* 正撤：撤单指令已送达公司，正在等待处理，此时不能确定是否已进场。 */
-#define OrderStatus_PartialCanceled 3     /* 部撤：下单指令中的一部份数量已被撤消。 */
-#define OrderStatus_Canceled 4            /* 已撤：委托指令全部被撤消。 */
-#define OrderStatus_Unquote 5             /* 未报：下单指令还未送入数据处理。 */
-#define OrderStatus_PendingQuote 6        /* 待报：下单指令还未被数据处理报到场内。 */
-#define OrderStatus_Quoting 7             /* 正报：下单指令已送达公司，正在等待处理，此时不能确定是否已进场。 */
-#define OrderStatus_Quoted 8              /* 已报：已收到下单反馈。 */
-#define OrderStatus_PartialDealed 9       /* 部成：下单指令部份成交。 */
-#define OrderStatus_Dealed 10             /* 已成：下单指令全部成交。 */
-#define OrderStatus_CancelInvalid 11      /* 撤废：撤单废单，表示撤单指令失败，原因可能是被撤的下单指令已经成交了或场内无法找到这条下单记录。 */
-#define OrderStatus_Invalid 12            /* 废单：交易所反馈的信息，表示该定单无效。 */
-#define OrderStatus_QuoteCanceled 13      /* 报撤：报单已经取消。 */
+#define OrderStatus_Unorder 1                           /* 未申报 */
+#define OrderStatus_UndealtOrder 3                      /* 已申报未成交 */
+#define OrderStatus_InvalidOrder 4                      /* 非法委托 */
+#define OrderStatus_PartialDealt 6                      /* 部分成交 */
+#define OrderStatus_AllDealt 7                          /* 全部成交 */
+#define OrderStatus_PartialDealtPartialCancelled  8     /* 部成部撤 */
+#define OrderStatus_AllCancelled 9                      /* 全部撤单 */
 /********** constant END **********/
 
 #pragma pack(push)
 
-/********** manage BEGIN **********/ 
+/********** manage BEGIN **********/
 #pragma region 初始化 initialize
 // 系统初始化。
 RUSHQUANT_API BOOL rushquant_initialize(const char* pUsername, const char* pKey);
@@ -186,8 +182,7 @@ typedef struct
     int Id;                              /* 编号 */
     char ErrorMessage[100];              /* 错误消息 */
 
-    int Total;                           /* 项目总条数 */
-    int Count;                           /* 项目返回条数 */
+    int Count;                           /* 项目条数 */
     QueryStockholderInfoOutputItem Items[];
 } QueryStockholderInfoOutput;
 // 查询股东信息，获取沪深A股东号码列表。
@@ -216,8 +211,7 @@ typedef struct
     int Id;                              /* 编号 */
     char ErrorMessage[100];              /* 错误消息 */
 
-    int Total;                           /* 项目总条数 */
-    int Count;                           /* 项目返回条数 */
+    int Count;                           /* 项目条数 */
     QuerySecurityCapitalInfoOutputItem Items[];
 } QuerySecurityCapitalInfoOutput;
 // 查询证券资产信息，获取账户的资产列表。
@@ -247,8 +241,7 @@ typedef struct
     int Id;                              /* 编号 */
     char ErrorMessage[100];              /* 错误消息 */
 
-    int Total;                           /* 项目总条数 */
-    int Count;                           /* 项目返回条数 */
+    int Count;                           /* 项目条数 */
     QuerySecurityPositionInfoOutputItem Items[];
 } QuerySecurityPositionInfoOutput;
 // 查询证券持仓信息，获取账户的持仓列表。
@@ -285,8 +278,6 @@ RUSHQUANT_API BOOL rushquant_trade_QuerySecurityOrderEvaluation(int accountId, c
 typedef struct
 {
     int Id;                              /* 编号 */
-
-    int BeginNumber;                     /* 起始序号 */
 } QuerySecurityIntradayOrderInput;
 #pragma pack(1)
 typedef struct
@@ -314,8 +305,7 @@ typedef struct
     int Id;                              /* 编号 */
     char ErrorMessage[100];              /* 错误消息 */
 
-    int Total;                           /* 项目总条数 */
-    int Count;                           /* 项目返回条数 */
+    int Count;                           /* 项目条数 */
     QuerySecurityIntradayOrderOutputItem Items[];
 } QuerySecurityIntradayOrderOutput;
 // 查询证券当日委托，获取证券委托列表。
@@ -330,7 +320,6 @@ typedef struct
 
     int BeginDate;                       /* 开始日期 */
     int EndDate;                         /* 终止日期 */
-    int BeginNumber;                     /* 起始序号 */
 } QuerySecurityHistoricalOrderInput;
 #pragma pack(1)
 typedef struct
@@ -358,8 +347,7 @@ typedef struct
     int Id;                              /* 编号 */
     char ErrorMessage[100];              /* 错误消息 */
 
-    int Total;                           /* 项目总条数 */
-    int Count;                           /* 项目返回条数 */
+    int Count;                           /* 项目条数 */
     QuerySecurityHistoricalOrderOutputItem Items[];
 } QuerySecurityHistoricalOrderOutput;
 // 查询证券历史委托，获取证券委托列表。
@@ -371,8 +359,6 @@ RUSHQUANT_API BOOL rushquant_trade_QuerySecurityHistoricalOrder(int accountId, c
 typedef struct
 {
     int Id;                              /* 编号 */
-
-    int BeginNumber;                     /* 起始序号 */
 } QuerySecurityIntradayDealInput;
 #pragma pack(1)
 typedef struct
@@ -397,8 +383,7 @@ typedef struct
     int Id;                              /* 编号 */
     char ErrorMessage[100];              /* 错误消息 */
 
-    int Total;                           /* 项目总条数 */
-    int Count;                           /* 项目返回条数 */
+    int Count;                           /* 项目条数 */
     QuerySecurityIntradayDealOutputItem Items[];
 } QuerySecurityIntradayDealOutput;
 // 查询证券当日成交，获取证券成交列表。
@@ -413,7 +398,6 @@ typedef struct
 
     int BeginDate;                       /* 开始日期 */
     int EndDate;                         /* 终止日期 */
-    int BeginNumber;                     /* 起始序号 */
 } QuerySecurityHistoricalDealInput;
 #pragma pack(1)
 typedef struct
@@ -436,8 +420,7 @@ typedef struct
     int Id;                              /* 编号 */
     char ErrorMessage[100];              /* 错误消息 */
 
-    int Total;                           /* 项目总条数 */
-    int Count;                           /* 项目返回条数 */
+    int Count;                           /* 项目条数 */
     QuerySecurityHistoricalDealOutputItem Items[];
 } QuerySecurityHistoricalDealOutput;
 // 查询证券历史成交，获取证券成交列表。

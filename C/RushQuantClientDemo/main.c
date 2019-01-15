@@ -4,13 +4,17 @@
 #include "const.h"
 #include "rushquant.h"
 
+
 #pragma comment(lib,"RushQuantClient64.lib")
+
+typedef unsigned char Byte;
 
 #define DYNAMIC_DATA
 
-static const int g_AccountId = 99999;
-static const char* g_Password = "121314";
-
+static char* __username;
+static char* __key;
+static int __accountId;
+static char* __password;
 
 char* CopyString(char *pDestination, const char *pSource)
 {
@@ -19,6 +23,7 @@ char* CopyString(char *pDestination, const char *pSource)
         ;
     return (pDestination);
 }
+
 
 char* GetQuoteType(char* exchangeId, int quoteType)
 {
@@ -66,14 +71,44 @@ char* GetTradeFlagText(int tradeFlag)
 {
     switch (tradeFlag)
     {
-        case 1:
+        case TradeFlag_Buy:
             return "1-买入";
-        case 2:
+        case TradeFlag_Sell:
             return "2-卖出";
-        case 3:
+        case TradeFlag_Purchase:
             return "3-申购";
-        case 4:
+        case TradeFlag_Redeem:
             return "4-赎回";
+        case TradeFlag_MarginBuy:
+            return "6-融资买入";
+        case TradeFlag_MarginSell:
+            return "7-融券卖出";
+        case TradeFlag_MarginBuyCover:
+            return "8-融资售回";
+        case TradeFlag_MarginSellCover:
+            return "9-融券购回";
+        case TradeFlag_ETFPurchase:
+            return "11-ETF申购";
+        case TradeFlag_ETFRedeem:
+            return "12-ETF赎回";
+        case TradeFlag_FundPurchase:
+            return "13-基金申购";
+        case TradeFlag_FundRedeem:
+            return "14-基金赎回";
+        case TradeFlag_GradedFundMerge:
+            return "17-分级基金合并";
+        case TradeFlag_GradedFundSplit:
+            return "18-分级基金合拆";
+        case TradeFlag_FundSubscribe:
+            return "19-基金认购";
+        case TradeFlag_Placement:
+            return "21-配售";
+        case TradeFlag_Distribution:
+            return "22-配号";
+        case TradeFlag_CancelBuy:
+            return "-1-撤买";
+        case TradeFlag_CancelSell:
+            return "-2-撤卖";
         default:
             return "0-未知";
     }
@@ -83,32 +118,20 @@ char* GetStatusText(int status)
 {
     switch (status)
     {
-        case 1:
-            return "1-";
-        case 2:
-            return "2-已申报未成交";
-        case 3:
-            return "3-";
-        case 4:
-            return "4-";
-        case 5:
-            return "5-";
-        case 6:
-            return "6-全部成交";
-        case 7:
-            return "7-部成部撤";
-        case 8:
-            return "8-全部撤单";
-        case 9:
-            return "9-";
-        case 10:
-            return "10-";
-        case 11:
-            return "11-";
-        case 12:
-            return "12-";
-        case 13:
-            return "13-";
+        case OrderStatus_Unorder:
+            return "1-未申报";
+        case OrderStatus_UndealtOrder:
+            return "3-已申报未成交";
+        case OrderStatus_InvalidOrder:
+            return "4-非法委托";
+        case OrderStatus_PartialDealt:
+            return "6-部分成交";
+        case OrderStatus_AllDealt:
+            return "7-全部成交";
+        case OrderStatus_PartialDealtPartialCancelled:
+            return "8-部成部撤";
+        case OrderStatus_AllCancelled:
+            return "9-全部撤单";
         default:
             return "0-未知";
     }
@@ -130,7 +153,7 @@ void test_QueryTickData()
     pOutput->Size = sizeof(buffer);
 #endif
 
-    int result = rushquant_trade_QueryTickData(g_AccountId, &input, &pOutput);
+    int result = rushquant_trade_QueryTickData(__accountId, &input, &pOutput);
     if (result != Error_Success)
     {
         printf("%d: %s\n", result, pOutput->ErrorMessage);
@@ -175,7 +198,7 @@ void test_QueryStockholderInfo()
     pOutput->Size = sizeof(buffer);
 #endif
 
-    int result = rushquant_trade_QueryStockholderInfo(g_AccountId, &input, &pOutput);
+    int result = rushquant_trade_QueryStockholderInfo(__accountId, &input, &pOutput);
     if (result != Error_Success)
     {
         printf("%d: %s\n", result, pOutput->ErrorMessage);
@@ -212,7 +235,7 @@ void test_QuerySecurityCapitalInfo()
     pOutput->Size = sizeof(buffer);
 #endif
 
-    int result = rushquant_trade_QuerySecurityCapitalInfo(g_AccountId, &input, &pOutput);
+    int result = rushquant_trade_QuerySecurityCapitalInfo(__accountId, &input, &pOutput);
     if (result != Error_Success)
     {
         printf("%d: %s\n", result, pOutput->ErrorMessage);
@@ -249,7 +272,7 @@ void test_QuerySecurityPositionInfo()
     pOutput->Size = sizeof(buffer);
 #endif
 
-    int result = rushquant_trade_QuerySecurityPositionInfo(g_AccountId, &input, &pOutput);
+    int result = rushquant_trade_QuerySecurityPositionInfo(__accountId, &input, &pOutput);
     if (result != Error_Success)
     {
         printf("%d: %s\n", result, pOutput->ErrorMessage);
@@ -286,7 +309,7 @@ void test_QuerySecurityIntradayOrder()
     pOutput->Size = sizeof(buffer);
 #endif
 
-    int result = rushquant_trade_QuerySecurityIntradayOrder(g_AccountId, &input, &pOutput);
+    int result = rushquant_trade_QuerySecurityIntradayOrder(__accountId, &input, &pOutput);
     if (result != Error_Success)
     {
         printf("%d: %s\n", result, pOutput->ErrorMessage);
@@ -331,8 +354,8 @@ void test_QuerySecurityHistoricalOrder()
     printf("******* QuerySecurityHistoricalOrder BEGIN *********\n");
 
     QuerySecurityHistoricalOrderInput input = { 0 };
-    input.BeginDate = 20181206;
-    input.EndDate = 20181213;
+    input.BeginDate = 20181226;
+    input.EndDate = 20181231;
 
 #ifdef DYNAMIC_DATA
     QuerySecurityHistoricalOrderOutput* pOutput = NULL;
@@ -342,7 +365,7 @@ void test_QuerySecurityHistoricalOrder()
     pOutput->Size = sizeof(buffer);
 #endif
 
-    int result = rushquant_trade_QuerySecurityHistoricalOrder(g_AccountId, &input, &pOutput);
+    int result = rushquant_trade_QuerySecurityHistoricalOrder(__accountId, &input, &pOutput);
     if (result != Error_Success)
     {
         printf("%d: %s\n", result, pOutput->ErrorMessage);
@@ -387,7 +410,6 @@ void test_QuerySecurityIntradayDeal()
     printf("******* QuerySecurityIntradayDeal BEGIN *********\n");
 
     QuerySecurityIntradayDealInput input = { 0 };
-    input.BeginNumber = 0;
 
 #ifdef DYNAMIC_DATA
     QuerySecurityIntradayDealOutput* pOutput = NULL;
@@ -397,7 +419,7 @@ void test_QuerySecurityIntradayDeal()
     pOutput->Size = sizeof(buffer);
 #endif
 
-    int result = rushquant_trade_QuerySecurityIntradayDeal(g_AccountId, &input, &pOutput);
+    int result = rushquant_trade_QuerySecurityIntradayDeal(__accountId, &input, &pOutput);
     if (result != Error_Success)
     {
         printf("%d: %s\n", result, pOutput->ErrorMessage);
@@ -449,7 +471,7 @@ void test_QuerySecurityHistoricalDeal()
     pOutput->Size = sizeof(buffer);
 #endif
 
-    int result = rushquant_trade_QuerySecurityHistoricalDeal(g_AccountId, &input, &pOutput);
+    int result = rushquant_trade_QuerySecurityHistoricalDeal(__accountId, &input, &pOutput);
     if (result != Error_Success)
     {
         printf("%d: %s\n", result, pOutput->ErrorMessage);
@@ -503,7 +525,7 @@ void test_QuerySecurityOrderEvaluation()
     pOutput->Size = sizeof(buffer);
 #endif
 
-    int result = rushquant_trade_QuerySecurityOrderEvaluation(g_AccountId, &input, &pOutput);
+    int result = rushquant_trade_QuerySecurityOrderEvaluation(__accountId, &input, &pOutput);
     if (result != Error_Success)
     {
         printf("%d: %s\n", result, pOutput->ErrorMessage);
@@ -522,42 +544,6 @@ void test_QuerySecurityOrderEvaluation()
     rushquant_free(pOutput);
 #endif
 }
-
-//void test_QuerySecurityOrderCapacity()
-//{
-//    printf("******* QueryTickData BEGIN *********\n");
-//
-//    QuerySecurityOrderCapacityInput input = { 0 };
-//    CopyString(input.ExchangeId, "SSE");
-//    CopyString(input.InstrumentCode, "601288");
-//
-//#ifdef DYNAMIC_DATA
-//    QuerySecurityOrderCapacityOutput* pOutput = NULL;
-//#else
-//    Byte buffer[50000];
-//    QuerySecurityOrderCapacityOutput* pOutput = (QuerySecurityOrderCapacityOutput*)buffer;
-//    pOutput->Size = sizeof(buffer);
-//#endif
-//
-//    int result = rushquant_trade_QuerySecurityOrderCapacity(g_AccountId, &input, &pOutput);
-//    if (result != Error_Success)
-//    {
-//        printf("%d: %s\n", result, pOutput->ErrorMessage);
-//        printf("******* QuerySecurityOrderCapacity END *********\n");
-//        printf("\n");
-//        return;
-//    }
-//
-//    QuerySecurityOrderCapacityOutput* pItem = pOutput;
-//    printf("可用金额:%.0f, 证券名称:%s\n",
-//        pItem->AvailableCapitalAmount, pItem->InstrumentName);
-//    printf("******* QuerySecurityOrderCapacity END *********\n");
-//    printf("\n");
-//
-//#ifdef DYNAMIC_DATA
-//    rushquant_free(pOutput);
-//#endif
-//}
 
 void test_PostSecuritySubmitOrder()
 {
@@ -579,7 +565,7 @@ void test_PostSecuritySubmitOrder()
     pOutput->Size = sizeof(buffer);
 #endif
 
-    int result = rushquant_trade_PostSecuritySubmitOrder(g_AccountId, &input, &pOutput);
+    int result = rushquant_trade_PostSecuritySubmitOrder(__accountId, &input, &pOutput);
     if (result != Error_Success)
     {
         printf("%d: %s\n", result, pOutput->ErrorMessage);
@@ -611,7 +597,7 @@ void test_PostSecuritySubmitOrder_NotReturn()
     input.OrderPrice = 3.25;
     input.OrderVolume = 100;
 
-    int result = rushquant_trade_PostSecuritySubmitOrder(g_AccountId, &input, NULL);
+    int result = rushquant_trade_PostSecuritySubmitOrder(__accountId, &input, NULL);
     if (result != Error_Success)
     {
         printf("%d\n", result);
@@ -644,7 +630,7 @@ void test_PostSecuritySubmitOrder_Purchase()
     pOutput->Size = sizeof(buffer);
 #endif
 
-    int result = rushquant_trade_PostSecuritySubmitOrder(g_AccountId, &input, &pOutput);
+    int result = rushquant_trade_PostSecuritySubmitOrder(__accountId, &input, &pOutput);
     if (result != Error_Success)
     {
         printf("%d: %s\n", result, pOutput->ErrorMessage);
@@ -680,7 +666,7 @@ void test_PostSecurityCancelOrder()
     pOutput->Size = sizeof(buffer);
 #endif
 
-    int result = rushquant_trade_PostSecurityCancelOrder(g_AccountId, &input, &pOutput);
+    int result = rushquant_trade_PostSecurityCancelOrder(__accountId, &input, &pOutput);
     if (result != Error_Success)
     {
         printf("%d: %s\n", result, pOutput->ErrorMessage);
@@ -702,9 +688,22 @@ void test_PostSecurityCancelOrder()
 
 int main(int argc, char* argv[])
 {
+    // TODO: Read config from args
+    if (argc == 5)
+    {
+        __username = argv[1]; // 比如'jimcai'。
+        __key = argv[2]; // 从Rushquant网站获取。
+        __accountId = atoi(argv[3]); // 要操作的账户id，为末尾5位。
+        __password = argv[4]; // 要操作的账户交易密码。
+    }
+    else
+    {
+        return -1;
+    }
+
     int result;
     // initialize
-    result = rushquant_initialize("jimcai", "zrqJzuCpdldVL9o8cvOA3tJJZ+HHBccvADtuPy2GwedMzRow0wpGD9S6CHPgMJTPOSNpmt6d789z0N4PNnooVQ==");
+    result = rushquant_initialize(__username, __key);
     if (result != Error_Success)
     {
         printf("Initialize Error: %d", result);
@@ -716,7 +715,7 @@ int main(int argc, char* argv[])
 
 
     // reset account
-    result = rushquant_trade_Reset(g_AccountId);
+    result = rushquant_trade_Reset(__accountId);
     if (result != Error_Success)
     {
         printf("Reset Error: %d", result);
@@ -725,35 +724,34 @@ int main(int argc, char* argv[])
     // Login
     LoginInput input = { 0 };
     // 设置交易密码
-    CopyString(input.TradePassword, g_Password);
+    CopyString(input.TradePassword, __password);
     LoginOutput output = { 0 };
-    result = rushquant_trade_Login(g_AccountId, &input, &output);
+    result = rushquant_trade_Login(__accountId, &input, &output);
     if (result != Error_Success)
     {
         printf("Login Error: %d, Message: %s", result, output.ErrorMessage);
         return result;
     }
 
-    //test_QueryTickData();
-    //test_QueryStockholderInfo();
-    //test_QuerySecurityCapitalInfo();
-    //test_QuerySecurityPositionInfo();
-    //test_QuerySecurityIntradayOrder();
-    //test_QuerySecurityHistoricalOrder();
-    //test_QuerySecurityIntradayDeal();
-    //test_QuerySecurityHistoricalDeal();
-    //test_QuerySecurityOrderEvaluation();
-    //test_QuerySecurityOrderCapacity();
+    test_QueryTickData();
+    test_QueryStockholderInfo();
+    test_QuerySecurityCapitalInfo();
+    test_QuerySecurityPositionInfo();
+    test_QuerySecurityIntradayOrder();
+    test_QuerySecurityHistoricalOrder();
+    test_QuerySecurityIntradayDeal();
+    test_QuerySecurityHistoricalDeal();
+    test_QuerySecurityOrderEvaluation();
     //test_PostSecuritySubmitOrder();
-    //Sleep(500);
     //test_PostSecuritySubmitOrder();
     //test_PostSecuritySubmitOrder_Purchase();
     //test_PostSecurityCancelOrder();
 
- /*   for (int i = 0; i < 5; i++)
-    {
-        test_PostSecuritySubmitOrder_NotReturn();
-    }*/
+   //for (int i = 0; i < 5; i++)
+   // {
+   //     test_PostSecuritySubmitOrder_NotReturn();
+   //     //sleep(10);
+   // }
 
     rushquant_dispose();
 
